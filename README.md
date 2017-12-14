@@ -46,9 +46,14 @@ Application entry
 
 ```
 
+// testando o server
 http://localhost:8080/v1/public/ping
 
+// inserindo perguntas na base
 http://localhost:8080/v1/pergunta/insert
+
+// deletando a pergunta com seu id
+http://localhost:8080/v1/pergunta/delete/id
 
 ```
 
@@ -64,7 +69,6 @@ curl -X POST localhost:8080/v1/public/ping
 ```
 pong
 ```
-
 
 # Example Curl Width Json :: pergunta/insert 
 
@@ -88,4 +92,18 @@ curl -X POST localhost:8080/v1/pergunta/insert \
 ```
 
 '{"status'":"error|ok","msg":"aqui estara a mensagem de error ou sucesso", "id":"aqui ira conter o id"}' 
+```
+
+# Example Curl Width Json :: pergunta/delete/id
+
+```
+
+curl -X POST localhost:8080/v1/pergunta/delete/id
+```
+
+# return
+
+```
+
+'{"status":"ok","msg":"removido com sucesso!"}'
 ```

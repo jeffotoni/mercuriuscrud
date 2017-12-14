@@ -93,7 +93,7 @@ func SetupRoutes(app *macaron.Macaron) {
 		app.Group("/pergunta", func() {
 
 			app.Post("/insert", handler.PerguntaCreate)
-			app.Delete("/delete/:id", handler.Hello)
+			app.Delete("/delete/:id", handler.PerguntaDelete)
 			app.Put("/update/:id", handler.Hello)
 		})
 	})

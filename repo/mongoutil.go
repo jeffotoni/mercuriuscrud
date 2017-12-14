@@ -97,3 +97,34 @@ func FindExist(namecollection string, Jcondition bson.M) (exist bool, err error)
 	exist = false
 	return
 }
+
+// remove registro
+func Remove(namecollection string, Jcondition bson.M) (status bool, err error) {
+
+	col, err := conf.GetMongoCollection(namecollection)
+
+	if err != nil {
+		log.Println(err.Error())
+		return
+	}
+
+	// Remove
+	info, err := col.RemoveAll(Jcondition)
+
+	if err != nil {
+		log.Println(err.Error())
+	}
+
+	if info.Removed == 0 {
+
+		status = false
+
+	} else {
+
+		status = true
+	}
+
+	fmt.Println("Removed", info.Removed)
+
+	return
+}
