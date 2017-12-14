@@ -46,8 +46,9 @@ Application entry
 
 ```
 
-localhost:8080/public/ping
-localhost:8080/pergunta/insert
+http://localhost:8080/v1/public/ping
+
+http://localhost:8080/v1/pergunta/insert
 
 ```
 
@@ -55,14 +56,28 @@ localhost:8080/pergunta/insert
 
 ```
 
-curl -X POST localhost:8080/public/ping
+curl -X POST localhost:8080/v1/public/ping
 ```
+
+# return
+
+```
+pong
+```
+
 
 # Example Curl Width Json :: pergunta/insert 
 
 ```
 
-curl -X POST localhost:8080/pergunta/insert \
+curl -X POST localhost:8080/v1/pergunta/insert \
 -H "Content-Type: application/json" \
 -d @pergunta.json
+```
+
+# return
+
+```
+
+'{"status'":"error|ok","msg":"aqui estara a mensagem de error ou sucesso", "id":"aqui ira conter o id"}' 
 ```
