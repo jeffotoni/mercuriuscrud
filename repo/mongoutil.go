@@ -218,48 +218,44 @@ func Find(namecollection, Uuid string) (jsonStr string, err error) {
 // find all registro
 func FindAll(namecollection string) (jsonStr string, err error) {
 
+	// return
+	var jsonPesq []byte
+
 	// criando session e retorno o db do collection
 	col, err := conf.GetMongoCollection(namecollection)
 
 	// collection que sera criado
 	// para busca
-	var collection model.TPesqPerguntas
+	var collection []model.TPesqPerguntas
 
-	// fazendo uma busca para buscar um registro
-	err = col.Find(bson.M{"ppr_uuid": 112}).Select(nil).One(&collection)
+	// Find All
+	err = col.Find(nil).Sort("-start").All(&collection)
 
-	// checando se
-	// tudo correu bem
 	if err != nil {
-
 		log.Println(err.Error())
 		return
 	}
 
-	// criando mapa para fazer json com
-	// marshal
-	mapPesq := map[string]string{
-		"ppr_cod":        strconv.Itoa(collection.Ppr_cod),
-		"ppr_ppq_cod":    strconv.Itoa(collection.Ppr_ppq_cod),
-		"ppr_per_cod":    strconv.Itoa(collection.Ppr_per_cod),
-		"ppr_ordem":      strconv.Itoa(collection.Ppr_ordem),
-		"ppr_dtcadastro": collection.Ppr_dtcadastro,
-		"ppr_dtaltera":   collection.Ppr_dtaltera,
+	// caso encontre registros
+	// faz o marshal para json
+	if len(collection) > 0 {
+
+		// convertendo para json
+		jsonPesq, err = json.Marshal(collection)
+
+		// checando se
+		// tudo correu bem
+		// na conversao
+		// do json
+		if err != nil {
+
+			log.Println(err.Error())
+			return
+		}
 	}
 
-	// convertendo para json
-	jsonPesq, err := json.Marshal(mapPesq)
-
-	// checando se
-	// tudo correu bem
-	// na conversao
-	// do json
-	if err != nil {
-
-		log.Println(err.Error())
-		return
-	}
-
+	// recebendo o json
+	// caso ocorra tudo certo
 	jsonStr = string(jsonPesq)
 	return
 }

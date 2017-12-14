@@ -105,7 +105,7 @@ func SetupRoutes(app *macaron.Macaron) {
 			app.Get("/find/:id", handler.PerguntaFind)
 
 			// buscando na base de dados
-			// app.Get("/findall", handler.PerguntaFindAll)
+			app.Get("/findall", handler.PerguntaFindAll)
 		})
 	})
 }
