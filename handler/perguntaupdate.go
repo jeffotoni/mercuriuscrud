@@ -83,7 +83,7 @@ func PerguntaUpdate(ctx *context.Context) {
 
 			} else {
 
-				msgJson = `{"status":"error","msg":"Algo estranho ocorreu sua atualizacao, foi usado o id: ` + Uuid + `"}`
+				msgJson = `{"status":"error","msg":"Algo estranho ocorreu na sua atualizacao, foi usado o id: ` + Uuid + `"}`
 
 				ctx.JSON(http.StatusUnauthorized, msgJson)
 			}

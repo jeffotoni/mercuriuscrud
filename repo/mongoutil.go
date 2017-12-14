@@ -9,12 +9,14 @@
 package repo
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/jeffotoni/mercuriuscrud/conf"
 	"github.com/jeffotoni/mercuriuscrud/model"
 	uuid "github.com/satori/go.uuid"
 	bson "gopkg.in/mgo.v2/bson"
 	"log"
+	"strconv"
 	"time"
 )
 
@@ -23,7 +25,7 @@ import (
 // ou error caso ocorra algum imprevisto
 func Insert(namecollection string, insert model.TPesqPerguntas) (Uuid string, err error) {
 
-	// fazendo um select no collection
+	// criando session e retorno o db do collection
 	col, err := conf.GetMongoCollection(namecollection)
 	if err != nil {
 		log.Println(err.Error())
@@ -70,6 +72,7 @@ func Insert(namecollection string, insert model.TPesqPerguntas) (Uuid string, er
 // find Exist
 func FindExist(namecollection string, Jcondition bson.M) (exist bool, err error) {
 
+	// criando session e retorno o db do collection
 	col, err := conf.GetMongoCollection(namecollection)
 	if err != nil {
 		log.Println(err.Error())
@@ -101,6 +104,7 @@ func FindExist(namecollection string, Jcondition bson.M) (exist bool, err error)
 // remove registro
 func Remove(namecollection string, Jcondition bson.M) (status bool, err error) {
 
+	// criando session e retorno o db do collection
 	col, err := conf.GetMongoCollection(namecollection)
 
 	if err != nil {
@@ -113,6 +117,7 @@ func Remove(namecollection string, Jcondition bson.M) (status bool, err error) {
 
 	if err != nil {
 		log.Println(err.Error())
+		return
 	}
 
 	if info.Removed == 0 {
@@ -130,8 +135,10 @@ func Remove(namecollection string, Jcondition bson.M) (status bool, err error) {
 // remove registro
 func Update(namecollection string, Jcondition bson.M, SetField bson.M) (status bool, err error) {
 
+	// criando session e retorno o db do collection
 	col, err := conf.GetMongoCollection(namecollection)
 
+	// conferindo os erros
 	if err != nil {
 		log.Println(err.Error())
 		return
@@ -142,8 +149,11 @@ func Update(namecollection string, Jcondition bson.M, SetField bson.M) (status b
 
 	if err != nil {
 		log.Println(err.Error())
+		return
 	}
 
+	// testando se houve
+	// atualizacao
 	if info.Updated == 0 {
 
 		status = false
@@ -153,7 +163,103 @@ func Update(namecollection string, Jcondition bson.M, SetField bson.M) (status b
 		status = true
 	}
 
-	fmt.Println("Updated", info.Updated)
+	return
+}
 
+// find registro
+func Find(namecollection, Uuid string) (jsonStr string, err error) {
+
+	// criando session e retorno o db do collection
+	col, err := conf.GetMongoCollection(namecollection)
+
+	// collection que sera criado
+	// para busca
+	var collection model.TPesqPerguntas
+
+	// fazendo uma busca para buscar um registro
+	err = col.Find(bson.M{"ppr_uuid": Uuid}).Select(nil).One(&collection)
+
+	// checando se
+	// tudo correu bem
+	if err != nil {
+
+		log.Println(err.Error())
+		return
+	}
+
+	// criando mapa para fazer json com
+	// marshal
+	mapPesq := map[string]string{
+		"ppr_cod":        strconv.Itoa(collection.Ppr_cod),
+		"ppr_ppq_cod":    strconv.Itoa(collection.Ppr_ppq_cod),
+		"ppr_per_cod":    strconv.Itoa(collection.Ppr_per_cod),
+		"ppr_ordem":      strconv.Itoa(collection.Ppr_ordem),
+		"ppr_dtcadastro": collection.Ppr_dtcadastro,
+		"ppr_dtaltera":   collection.Ppr_dtaltera,
+	}
+
+	// convertendo para json
+	jsonPesq, err := json.Marshal(mapPesq)
+
+	// checando se
+	// tudo correu bem
+	// na conversao
+	// do json
+	if err != nil {
+
+		log.Println(err.Error())
+		return
+	}
+
+	jsonStr = string(jsonPesq)
+	return
+}
+
+// find all registro
+func FindAll(namecollection string) (jsonStr string, err error) {
+
+	// criando session e retorno o db do collection
+	col, err := conf.GetMongoCollection(namecollection)
+
+	// collection que sera criado
+	// para busca
+	var collection model.TPesqPerguntas
+
+	// fazendo uma busca para buscar um registro
+	err = col.Find(bson.M{"ppr_uuid": 112}).Select(nil).One(&collection)
+
+	// checando se
+	// tudo correu bem
+	if err != nil {
+
+		log.Println(err.Error())
+		return
+	}
+
+	// criando mapa para fazer json com
+	// marshal
+	mapPesq := map[string]string{
+		"ppr_cod":        strconv.Itoa(collection.Ppr_cod),
+		"ppr_ppq_cod":    strconv.Itoa(collection.Ppr_ppq_cod),
+		"ppr_per_cod":    strconv.Itoa(collection.Ppr_per_cod),
+		"ppr_ordem":      strconv.Itoa(collection.Ppr_ordem),
+		"ppr_dtcadastro": collection.Ppr_dtcadastro,
+		"ppr_dtaltera":   collection.Ppr_dtaltera,
+	}
+
+	// convertendo para json
+	jsonPesq, err := json.Marshal(mapPesq)
+
+	// checando se
+	// tudo correu bem
+	// na conversao
+	// do json
+	if err != nil {
+
+		log.Println(err.Error())
+		return
+	}
+
+	jsonStr = string(jsonPesq)
 	return
 }

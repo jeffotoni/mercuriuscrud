@@ -92,9 +92,20 @@ func SetupRoutes(app *macaron.Macaron) {
 		// grupo para chamadas internas e privadas
 		app.Group("/pergunta", func() {
 
+			// inserindo na base de dados
 			app.Post("/insert", handler.PerguntaCreate)
+
+			// deletando da base de dados
 			app.Delete("/delete/:id", handler.PerguntaDelete)
+
+			// atualizando da base de dados
 			app.Put("/update/:id", handler.PerguntaUpdate)
+
+			// buscando na base de dados
+			app.Get("/find/:id", handler.PerguntaFind)
+
+			// buscando na base de dados
+			// app.Get("/findall", handler.PerguntaFindAll)
 		})
 	})
 }
