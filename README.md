@@ -58,6 +58,12 @@ http://localhost:8080/v1/pergunta/delete/id
 // Atualizando a pergunta com seu id
 http://localhost:8080/v1/pergunta/update/id
 
+// Buscando registro especifico
+http://localhost:8080/v1/pergunta/find/id
+
+// Buscando todos registros
+http://localhost:8080/v1/pergunta/findall
+
 ```
 
 # Example Curl Ping
