@@ -55,6 +55,9 @@ http://localhost:8080/v1/pergunta/insert
 // deletando a pergunta com seu id
 http://localhost:8080/v1/pergunta/delete/id
 
+// Atualizando a pergunta com seu id
+http://localhost:8080/v1/pergunta/update/id
+
 ```
 
 # Example Curl Ping
@@ -76,7 +79,7 @@ pong
 
 curl -X POST localhost:8080/v1/pergunta/insert \
 -H "Content-Type: application/json" \
--d @pergunta.json
+-d @perguntas.json
 ```
 # OR
 
@@ -106,4 +109,20 @@ curl -X DELETE localhost:8080/v1/pergunta/delete/id
 ```
 
 '{"status":"ok","msg":"removido com sucesso!"}'
+```
+
+# Example Curl Width Json :: pergunta/update/id
+
+```
+
+curl -X DELETE localhost:8080/v1/pergunta/update/id
+-H "Content-Type: application/json" \
+-d @perguntas-update.json
+```
+
+# return
+
+```
+
+'{"status":"ok","msg":"Atualizado com sucesso!"}'
 ```
