@@ -126,3 +126,29 @@ curl -X DELETE localhost:8080/v1/pergunta/update/id
 
 '{"status":"ok","msg":"Atualizado com sucesso!"}'
 ```
+
+# Example Curl :: pergunta/find/id
+
+```
+
+curl -X GET localhost:8080/v1/pergunta/find/id
+```
+
+# return
+
+```
+
+'{
+	"status":"ok",
+	"msg":"Encontrou o id na base de dados!", 
+	"data":
+		"{
+			"ppr_cod":"234",
+			"ppr_dtaltera":"12/03/2017",
+			"ppr_dtcadastro":"10/02/2017",
+			"ppr_ordem":"120",
+			"ppr_per_cod":"1001",
+			"ppr_ppq_cod":"1500"
+		}"
+}'
+```
