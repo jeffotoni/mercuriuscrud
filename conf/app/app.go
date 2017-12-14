@@ -94,7 +94,7 @@ func SetupRoutes(app *macaron.Macaron) {
 
 			app.Post("/insert", handler.PerguntaCreate)
 			app.Delete("/delete/:id", handler.PerguntaDelete)
-			app.Put("/update/:id", handler.Hello)
+			app.Put("/update/:id", handler.PerguntaUpdate)
 		})
 	})
 }

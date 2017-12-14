@@ -98,7 +98,7 @@ curl -X POST localhost:8080/v1/pergunta/insert \
 
 ```
 
-curl -X POST localhost:8080/v1/pergunta/delete/id
+curl -X DELETE localhost:8080/v1/pergunta/delete/id
 ```
 
 # return

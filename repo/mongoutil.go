@@ -124,7 +124,36 @@ func Remove(namecollection string, Jcondition bson.M) (status bool, err error) {
 		status = true
 	}
 
-	fmt.Println("Removed", info.Removed)
+	return
+}
+
+// remove registro
+func Update(namecollection string, Jcondition bson.M, SetField bson.M) (status bool, err error) {
+
+	col, err := conf.GetMongoCollection(namecollection)
+
+	if err != nil {
+		log.Println(err.Error())
+		return
+	}
+
+	// Remove
+	info, err := col.UpdateAll(Jcondition, SetField)
+
+	if err != nil {
+		log.Println(err.Error())
+	}
+
+	if info.Updated == 0 {
+
+		status = false
+
+	} else {
+
+		status = true
+	}
+
+	fmt.Println("Updated", info.Updated)
 
 	return
 }

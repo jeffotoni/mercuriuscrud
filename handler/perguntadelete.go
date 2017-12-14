@@ -21,19 +21,28 @@ import (
 	// "strings"
 )
 
+// removendo registro da base de dados
 func PerguntaDelete(ctx *context.Context) {
 
 	// collection
 	collection := "tpesqperguntas"
 
+	// mensagem json
 	var msgJson string
 
+	// Chave unica
 	Uuid := ctx.Params(":id")
 
+	// testando
+	// o Uuid
 	if Uuid != "" {
 
+		// chamando o metodo para remover o registro do banco
 		status, err := repo.Remove(collection, bson.M{"ppr_uuid": Uuid})
 
+		// if tudo correr bem
+		// registro foi removido
+		// com sucesso
 		if err == nil && status {
 
 			// Uuid
@@ -44,7 +53,7 @@ func PerguntaDelete(ctx *context.Context) {
 
 		} else {
 
-			msgJson = `{"status":"error","msg":"Algo estranho ocorreu sua remocao nao foi realizada no Uuid: ` + Uuid + `"}`
+			msgJson = `{"status":"error","msg":"Algo estranho ocorreu sua remocao nao foi realizada no id: ` + Uuid + `"}`
 
 			ctx.JSON(http.StatusUnauthorized, msgJson)
 		}
