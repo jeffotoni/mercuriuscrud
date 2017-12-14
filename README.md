@@ -40,3 +40,29 @@ Database comunication following repository pattern
 main.go
 Application entry
 ```
+
+
+# Routes 
+
+```
+
+localhost:8080/public/ping
+localhost:8080/pergunta/insert
+
+```
+
+# Example Curl Ping
+
+```
+
+curl -X POST localhost:8080/public/ping
+```
+
+# Example Curl Width Json :: pergunta/insert 
+
+```
+
+curl -X POST localhost:8080/pergunta/insert \
+-H "Content-Type: application/json" \
+-d @pergunta.json
+```
