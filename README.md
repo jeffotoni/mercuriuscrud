@@ -1,11 +1,25 @@
 # mercuriuscrud
 
+Um Crud Usando MongoDb e Mercurius como Framework ...
+
+# Install Mongo
+
+Install [https://docs.mongodb.com/v3.4/tutorial/install-mongodb-on-ubuntu/]
 
 go get -v gopkg.in/mgo.v2/bson
 
-go get -v https://github.com/satori/go.uuid
+go get -v github.com/satori/go.uuid
 
 go get -v github.com/jeffotoni/mercuriuscrud
+
+# Start app
+go run main.go 
+
+# Compila app
+go build main.go
+
+# Start app compilado
+./main
 
 
 # Structure of a Project
