@@ -6,6 +6,8 @@ Um Crud Usando MongoDb e Mercurius como Framework ...
 
 Install [https://docs.mongodb.com/v3.4/tutorial/install-mongodb-on-ubuntu/]
 
+# Install Dependencies
+
 go get -v gopkg.in/mgo.v2/bson
 
 go get -v github.com/satori/go.uuid
