@@ -10,7 +10,7 @@ package handler
 
 import (
 	"encoding/json"
-	"strconv"
+	//"strconv"
 	// "fmt"
 	"github.com/jeffotoni/mercuriuscrud/lib/context"
 	"github.com/jeffotoni/mercuriuscrud/model"
@@ -86,41 +86,41 @@ func RepostaInsert(ctx *context.Context) {
 
 						// validar se existe o dado no banco
 						// if exist o dado na base de dados
-						exist, err := repo.GetOne(table, "rsp_cod", Tr.Rsp_cod)
+						exist := repo.GetOne(table, "rsp_cod", Tr.Rsp_cod)
 
 						// caso
 						// exista error
 						// enviar para o cliente
-						if err != nil {
+						//if exist == 0  {
 
-							msgJson = `{"status":"error","msg":"GetOne Error: ` + err.Error() + `"}`
+						//msgJson = `{"status":"error","msg":"GetOne Error: ` + err.Error() + `"}`
+
+						//} else {
+
+						// se existe
+						// nao faca
+						// o insert
+						if exist > 0 {
+
+							msgJson = `{"status":"error",msg":"estes dados ja existe na base de dados!"}`
 
 						} else {
 
-							// se existe
-							// nao faca
-							// o insert
-							if exist > 0 {
+							// faca o insert no banco de dados
+							// retorne o uuid do salvar
+							// caso tenha erro informe ao cliente
+							ID, err := repo.InsertResposta(Tr)
 
-								msgJson = `{"status":"error",msg":"estes dados ja existe na base de dados!"}`
+							if err != nil {
+
+								msgJson = `{"status":"error","msg":"ocorreu algum erro ao salvar seus dados error: ` + err.Error() + `"}`
 
 							} else {
 
-								// faca o insert no banco de dados
-								// retorne o uuid do salvar
-								// caso tenha erro informe ao cliente
-								ID, err := repo.InsertResposta(Tr)
-
-								if err != nil {
-
-									msgJson = `{"status":"error","msg":"ocorreu algum erro ao salvar seus dados error: ` + err.Error() + `"}`
-
-								} else {
-
-									msgJson = `{"status":"ok","msg":"seus dados foram inseridos com sucesso!", "id":"` + strconv.Itoa(ID) + `"}`
-								}
+								msgJson = `{"status":"ok","msg":"seus dados foram inseridos com sucesso!", "id":"` + ID + `"}`
 							}
 						}
+						//}
 					}
 
 					// send write to client

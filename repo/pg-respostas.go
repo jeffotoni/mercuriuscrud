@@ -9,31 +9,41 @@
 package repo
 
 import (
-	// 	"fmt"
+	"fmt"
 	// "database/sql"
 	"github.com/jeffotoni/mercuriuscrud/conf"
 	"github.com/jeffotoni/mercuriuscrud/model"
+	uuid "github.com/satori/go.uuid"
 	"log"
-	// 	uuid "github.com/satori/go.uuid"
+	"time"
 )
 
 // Insere o dado nat tabela
-func InsertResposta(resp model.TRespostas) (Id int, err error) {
+func InsertResposta(resp model.TRespostas) (Uuid string, err error) {
 
 	err = nil
+
+	var Id int
+
 	db, err := conf.GetDB()
+
 	if err != nil {
 		log.Println("[InsertResposta] Erro ao criar instancia do DB: " + err.Error())
 		return
 	}
 
-	// Rsp_uuid       string `json:"rsp_uid"`
-	// Rsp_cod        int    `json:"rsp_cod "`
-	// Rsp_per_cod    int    `json:"rsp_per_cod "`
-	// Rsp_titulo     int    `json:"rsp_titulo"`
-	// Rsp_correta    int    `json:"rsp_correta"`
-	// Rsp_dtcadastro string `json:"rsp_dtcadastro"`
-	// Rsp_datetime   string `json:"rsp_datetime"`
+	// criando uuid
+	// para salvar
+	// na base
+	u1 := uuid.NewV4()
+
+	// convertendo uuid para string
+	resp.Rsp_uuid = fmt.Sprintf("%s", u1)
+
+	DataNow := time.Now().Format(conf.LayoutDate)
+	HourNow := time.Now().Format(conf.LayoutHour)
+
+	resp.Rsp_datetime = DataNow + " " + HourNow
 
 	insert := `INSERT INTO trespostas (
 		rsp_uid,
@@ -44,26 +54,28 @@ func InsertResposta(resp model.TRespostas) (Id int, err error) {
 		rsp_dtcadastro,
 		rsp_datetime)
 		VALUES (
-		?,
-		?,
-		?,
-		?,
-		?,
-		?,
-		?)`
+		:rsp_uuid,
+		:rsp_cod,
+		:rsp_per_cod,
+		:rsp_titulo,
+		:rsp_correta,
+		:rsp_dtcadastro,
+		:rsp_datetime) RETURNING rsp_id`
 
-	result, err := db.Exec(insert, resp.Rsp_uuid, resp.Rsp_cod, resp.Rsp_per_cod, resp.Rsp_titulo, resp.Rsp_correta, resp.Rsp_dtcadastro, resp.Rsp_datetime)
+	stmt, err := db.PrepareNamed(insert)
+
+	if err != nil {
+		log.Printf("[InsertResposta] Erro ao Preparar o inserir. SQL: [%s] - Objeto: [%+v] - Error: [%s]\n", insert, err.Error())
+		return
+	}
+
+	err = stmt.Get(&Id, resp)
+
 	if err != nil {
 		log.Printf("[InsertResposta] Erro ao inserir. SQL: [%s] - Objeto: [%+v] - Error: [%s]\n", insert, resp, err.Error())
 		return
 	}
 
-	lastId, err := result.LastInsertId()
-
-	if err != nil {
-		log.Printf("[InsertResposta] Erro ao obter o ID. SQL: [%s] - Objeto: [%+v] - Error: [%s]\n", insert, resp, err.Error())
-		return
-	}
-	Id = int(lastId)
+	Uuid = resp.Rsp_uuid
 	return
 }

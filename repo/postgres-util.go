@@ -10,17 +10,15 @@ package repo
 
 import (
 	// "database/sql"
-	"log"
-	// 	"fmt"
+	//"fmt"
 	"github.com/jeffotoni/mercuriuscrud/conf"
-	// 	"github.com/jeffotoni/mercuriuscrud/model"
-	// 	uuid "github.com/satori/go.uuid"
+	// "github.com/jeffotoni/mercuriuscrud/model"
+	"log"
 )
 
 // checando se existe dado especifico na base de dados
-func GetOne(table, Key string, Id int) (R int, err error) {
+func GetOne(table, Key string, Id int) (R int) {
 
-	err = nil
 	db, err := conf.GetDB()
 
 	if err != nil {
@@ -29,20 +27,22 @@ func GetOne(table, Key string, Id int) (R int, err error) {
 	}
 
 	sql := `select 
-				count(*)
+				` + Key + `
 			from
 				` + table + `
 			where
-				` + Key + `  = ?`
+				` + Key + `=$1`
 
 	err = db.Get(&R, sql, Id)
 
 	if err != nil {
 
-		log.Println("[GetOne] Erro ao executar a query: ", sql, " com o parametro: ", Id, " - Erro: ", err.Error())
+		// log.Println("[GetOne] Erro ao executar a query: ", sql, " com o parametro: ", Id, " - Erro: ", err.Error())
+		R = 0
 		return
 	}
 
+	R = Id
 	return
 }
 

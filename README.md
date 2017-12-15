@@ -1,6 +1,6 @@
 # mercuriuscrud
 
-Um Crud Usando MongoDb e Mercurius como Framework ...
+Um Crud Usando MongoDb e Posgresql com Framework Mercurius ...
 
 # Install Mongo
 
@@ -112,7 +112,9 @@ http://localhost:8080/v1/pergunta/findall
 // criando tabela dinamicamente
 http://localhost:8080/v1/resposta/create/table
 
-... restante em desenvolvimento, insert, update, delete e select
+http://localhost:8080/v1/resposta/insert
+
+... restante em desenvolvimento, update, delete e select
 
 ```
 
@@ -271,3 +273,20 @@ curl -X GET localhost:8080/v1/pergunta/findall
 		"ppr_datetime":"2017-12-14 16:38:18"
 	}]"
 }'
+```
+
+# Example Curl :: resposta/create/table
+
+```
+
+curl -X POST localhost:8080/v1/resposta/create/table
+```
+
+# Example Curl :: resposta/insert
+
+```
+
+curl -X POST localhost:8080/v1/resposta/insert \
+-H 'Content-Type: application/json'
+-d @resposta.json
+```
