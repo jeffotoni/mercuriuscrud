@@ -27,7 +27,7 @@ func QuestionsCreate(ctx *context.Context) {
 	var err error
 
 	// mensagem json
-	var msgJson string
+	var msgJson, Uuid string
 
 	// tipo aceito de content-type
 	cTypeAceito := "application/json"
@@ -63,13 +63,12 @@ func QuestionsCreate(ctx *context.Context) {
 			if string(byteJson) != "" {
 
 				// Criar registro no banco de dados
-				Uuid, err := repo.AddQuestion(byteJson)
+				Uuid, err = repo.AddQuestion(byteJson)
 
 				// tratando o erro
 				if err != nil {
-					log.Println("[QuestionsCreate] Erro ao tentar inserir registro: " + err.Error())
-					msgJson := `{"status":"error","msg":"Erro ao tentar inserir registro"}`
-					// send write to client
+					log.Println(err.Error())
+					msgJson := `{"status":"error","msg":"` + err.Error() + `"}`
 					ctx.JSON(http.StatusUnauthorized, msgJson)
 					return
 				} else {

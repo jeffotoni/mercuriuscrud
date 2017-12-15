@@ -10,6 +10,7 @@ package repo
 
 import (
 	"encoding/json"
+	"errors"
 	"github.com/jeffotoni/mercuriuscrud/model"
 	bson "gopkg.in/mgo.v2/bson"
 	"log"
@@ -59,7 +60,9 @@ func AddQuestion(byteJson []byte) (Uuid string, err error) {
 				// nao faca
 				// o insert
 				if exist {
-					log.Println("[AddQuestion] Error estes dados ja existe na base de dados!")
+					msgerror := "[AddQuestion] Error estes dados ja existe na base de dados!"
+					err = errors.New(msgerror)
+					log.Println(msgerror)
 					return
 				} else {
 
