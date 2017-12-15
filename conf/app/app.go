@@ -91,45 +91,45 @@ func SetupRoutes(app *macaron.Macaron) {
 
 		// grupo de perguntas
 		// mongoDb
-		app.Group("/pergunta", func() {
+		app.Group("/questions", func() {
 
 			// inserindo na base de dados
-			app.Post("/insert", handler.PerguntaCreate)
+			app.Post("/", handler.PerguntaCreate)
 
 			// deletando da base de dados
-			app.Delete("/delete/:id", handler.PerguntaDelete)
+			app.Delete("/:id", handler.PerguntaDelete)
 
 			// atualizando da base de dados
-			app.Put("/update/:id", handler.PerguntaUpdate)
+			app.Put("/:id", handler.PerguntaUpdate)
 
 			// buscando na base de dados
-			app.Get("/find/:id", handler.PerguntaFind)
+			app.Get("/:id", handler.PerguntaFind)
 
 			// buscando na base de dados todos registros
-			app.Get("/findall", handler.PerguntaFindAll)
+			app.Get("/", handler.PerguntaFindAll)
 		})
 
 		// grupo resposta usando
 		// postgresql
-		app.Group("/resposta", func() {
+		app.Group("/answers", func() {
 
 			// inserindo na base de dados
-			app.Post("/create/table", handler.RepostaCreate)
+			app.Post("/tables", handler.RepostaCreate)
 
 			// inserindo na base de dados
-			app.Post("/insert", handler.RepostaInsert)
+			app.Post("/", handler.RepostaInsert)
 
 			// deletando da base de dados
-			app.Delete("/delete/:id", handler.Hello)
+			app.Delete("/:id", handler.Hello)
 
 			// atualizando da base de dados
-			app.Put("/update/:id", handler.Hello)
+			app.Put("/:id", handler.Hello)
 
 			// buscando na base de dados
-			app.Get("/find/:id", handler.Hello)
+			app.Get("/:id", handler.Hello)
 
 			// buscando na base de dados todos registros
-			app.Get("/findall", handler.Hello)
+			app.Get("/", handler.Hello)
 		})
 	})
 }

@@ -90,32 +90,35 @@ Application entry
 // testando o server
 http://localhost:8080/v1/public/ping
 
-// PERGUNTAS MONGO
+// Base de dados usada Mongo
 
-// inserindo perguntas na base
-http://localhost:8080/v1/pergunta/insert
+- GET /v1/questions 		- Recupera a lista de questoes
 
-// deletando a pergunta com seu id
-http://localhost:8080/v1/pergunta/delete/id
+- GET /v1/questions/12 		- Recupera uma questao específica
 
-// Atualizando a pergunta com seu id
-http://localhost:8080/v1/pergunta/update/id
+- POST /v1/questions 		- Cria uma nova questao
 
-// Buscando registro especifico
-http://localhost:8080/v1/pergunta/find/id
+- PUT /v1/questions/23 		- Atualiza a questao #23
 
-// Buscando todos registros
-http://localhost:8080/v1/pergunta/findall
+- DELETE /v1/questions/33 	- Deleta a questao #33
 
-// RESPOSTAS POSTGRESQL
 
-// criando tabela dinamicamente
-http://localhost:8080/v1/resposta/create/table
+// Base de dados usando Postgresql
 
-// inserindo registro na base do postgres
-http://localhost:8080/v1/resposta/insert
+// Base de dados usada Mongo
 
-... restante em desenvolvimento, update, delete e select
+- GET /v1/answers 			- Recupera a lista de answers
+
+- GET /v1/answers/12 		- Recupera uma answers específica
+
+- POST /v1/answers 			- Cria uma nova answers
+
+- PUT /v1/answers/23 		- Atualiza a answers #23
+
+- DELETE /v1/answers/33 	- Deleta a answers #33
+
+- POST /v1/answers/tables 	- Cria as tabelas dinamicamente
+
 
 ```
 
@@ -132,19 +135,19 @@ curl -X POST localhost:8080/v1/public/ping
 pong
 ```
 
-# Example Curl Width Json :: pergunta/insert 
+# Example Curl Width Json
 
 ```
 
-curl -X POST localhost:8080/v1/pergunta/insert \
+curl -X POST localhost:8080/v1/questions \
 -H "Content-Type: application/json" \
--d @perguntas.json
+-d @questionss.json
 ```
 # OR
 
 ```
 
-curl -X POST localhost:8080/v1/pergunta/insert \
+curl -X POST localhost:8080/v1/questions \
 -H "Content-Type: application/json" \
 -d '{"ppr_cod":100,"ppr_ppq_cod":6,"ppr_per_cod":5,"ppr_ordem":3,"ppr_dtcadastro":"10/07/2017","ppr_dtaltera":"12/08/2017"}'
 ```
@@ -156,11 +159,11 @@ curl -X POST localhost:8080/v1/pergunta/insert \
 '{"status'":"error|ok","msg":"aqui estara a mensagem de error ou sucesso", "id":"aqui ira conter o id"}' 
 ```
 
-# Example Curl Width Json :: pergunta/delete/id
+# Example Curl Width Json
 
 ```
 
-curl -X DELETE localhost:8080/v1/pergunta/delete/id
+curl -X DELETE localhost:8080/v1/questions/:id
 ```
 
 # return
@@ -170,13 +173,13 @@ curl -X DELETE localhost:8080/v1/pergunta/delete/id
 '{"status":"ok","msg":"removido com sucesso!"}'
 ```
 
-# Example Curl Width Json :: pergunta/update/id
+# Example Curl Width Json
 
 ```
 
-curl -X DELETE localhost:8080/v1/pergunta/update/id
+curl -X DELETE localhost:8080/v1/questions/:id
 -H "Content-Type: application/json" \
--d @perguntas-update.json
+-d @questionss-update.json
 ```
 
 # return
@@ -186,11 +189,11 @@ curl -X DELETE localhost:8080/v1/pergunta/update/id
 '{"status":"ok","msg":"Atualizado com sucesso!"}'
 ```
 
-# Example Curl :: pergunta/find/id
+# Example Curl
 
 ```
 
-curl -X GET localhost:8080/v1/pergunta/find/id
+curl -X GET localhost:8080/v1/questions/:id
 ```
 
 # return
@@ -212,11 +215,11 @@ curl -X GET localhost:8080/v1/pergunta/find/id
 }'
 ```
 
-# Example Curl :: pergunta/findall
+# Example Curl
 
 ```
 
-curl -X GET localhost:8080/v1/pergunta/findall
+curl -X GET localhost:8080/v1/questions
 ```
 
 # return
@@ -276,18 +279,18 @@ curl -X GET localhost:8080/v1/pergunta/findall
 }'
 ```
 
-# Example Curl :: resposta/create/table
+# Example Curl
 
 ```
 
-curl -X POST localhost:8080/v1/resposta/create/table
+curl -X POST localhost:8080/v1/answers/tables
 ```
 
-# Example Curl :: resposta/insert
+# Example Curl
 
 ```
 
-curl -X POST localhost:8080/v1/resposta/insert \
+curl -X POST localhost:8080/v1/answers \
 -H 'Content-Type: application/json'
--d @resposta.json
+-d @answers.json
 ```
