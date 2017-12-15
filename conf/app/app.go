@@ -89,7 +89,8 @@ func SetupRoutes(app *macaron.Macaron) {
 			})
 		})
 
-		// grupo para chamadas internas e privadas
+		// grupo de perguntas
+		// mongoDb
 		app.Group("/pergunta", func() {
 
 			// inserindo na base de dados
@@ -106,6 +107,29 @@ func SetupRoutes(app *macaron.Macaron) {
 
 			// buscando na base de dados todos registros
 			app.Get("/findall", handler.PerguntaFindAll)
+		})
+
+		// grupo resposta usando
+		// postgresql
+		app.Group("/resposta", func() {
+
+			// inserindo na base de dados
+			app.Post("/create/table", handler.Hello)
+
+			// inserindo na base de dados
+			app.Post("/insert", handler.RepostaInsert)
+
+			// deletando da base de dados
+			app.Delete("/delete/:id", handler.Hello)
+
+			// atualizando da base de dados
+			app.Put("/update/:id", handler.Hello)
+
+			// buscando na base de dados
+			app.Get("/find/:id", handler.Hello)
+
+			// buscando na base de dados todos registros
+			app.Get("/findall", handler.Hello)
 		})
 	})
 }

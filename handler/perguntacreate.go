@@ -94,7 +94,7 @@ func PerguntaCreate(ctx *context.Context) {
 					} else {
 
 						// validar se existe o dado no banco
-						// if exist o dado no mong nao faca
+						// if exist o dado no mongo nao faca
 						exist, err := repo.FindExist(collection, bson.M{"ppr_cod": Tp.Ppr_cod})
 
 						// caso
