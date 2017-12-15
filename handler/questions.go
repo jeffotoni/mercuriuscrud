@@ -117,7 +117,7 @@ func QuestionsDelete(ctx *context.Context) {
 			ctx.JSON(http.StatusOK, msgJson)
 
 		} else {
-			msgerror = `[QuestionsDelete] Algo estranho ocorreu sua remocao nao foi realizada no id: ` + Uuid
+			msgerror = `[QuestionsDelete] Algo estranho ocorreu em sua remocao Uuid: ` + Uuid
 			log.Println(msgerror)
 			msgJson = `{"status":"error","msg":"` + msgerror + `]"}`
 			ctx.JSON(http.StatusUnauthorized, msgJson)
@@ -126,6 +126,66 @@ func QuestionsDelete(ctx *context.Context) {
 
 	} else {
 		msgerror = "[QuestionsDelete] Uuid é obrigatório!"
+		log.Println(msgerror)
+		msgJson = `{"status":"error","msg":"` + msgerror + `]"}`
+		ctx.JSON(http.StatusUnauthorized, msgJson)
+		return
+	}
+}
+
+// Update na base de dados
+func QuestionsUpdate(ctx *context.Context) {
+
+	// define err
+	var err error
+
+	// mensagem json
+	var msgJson, msgerror string
+
+	// byjson
+	var byteJson []byte
+
+	// Chave unica
+	Uuid := ctx.Params(":id")
+
+	// testando
+	// o Uuid
+	if Uuid != "" {
+
+		// capturando json findo da requisicao
+		// estamos pegando em bytes para ser
+		// usado no Unmarshal que recebe bytes
+		byteJson, err = ctx.Req.Body().Bytes()
+
+		if err != nil {
+			msgJson = `{"status":"error","msg":"` + err.Error() + `]"}`
+			ctx.JSON(http.StatusUnauthorized, msgJson)
+			return
+		}
+
+		// fechando Req.Body
+		defer ctx.Req.Body().ReadCloser()
+
+		// del question
+		err := repo.UpQuestion(Uuid, byteJson)
+
+		// if tudo correr bem
+		// registro foi atualizado
+		// com sucesso
+		if err == nil {
+			// Uuid
+			msgJson = `{"status":"ok","msg":"atualizado com sucesso seu Uuid: ` + Uuid + `!"}`
+			ctx.JSON(http.StatusOK, msgJson)
+		} else {
+			msgerror = `[QuestionsUpdate] Algo estranho ocorreu em sua atualizacao Uuid: ` + Uuid
+			log.Println(msgerror)
+			msgJson = `{"status":"error","msg":"` + msgerror + `]"}`
+			ctx.JSON(http.StatusUnauthorized, msgJson)
+			return
+		}
+
+	} else {
+		msgerror = "[QuestionsUpdate] Uuid é obrigatório!"
 		log.Println(msgerror)
 		msgJson = `{"status":"error","msg":"` + msgerror + `]"}`
 		ctx.JSON(http.StatusUnauthorized, msgJson)

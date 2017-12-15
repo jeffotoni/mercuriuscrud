@@ -100,7 +100,7 @@ func SetupRoutes(app *macaron.Macaron) {
 			app.Delete("/:id", handler.QuestionsDelete)
 
 			// atualizando da base de dados
-			app.Put("/:id", handler.PerguntaUpdate)
+			app.Put("/:id", handler.QuestionsUpdate)
 
 			// buscando na base de dados
 			app.Get("/:id", handler.PerguntaFind)

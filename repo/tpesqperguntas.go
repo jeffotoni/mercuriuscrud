@@ -142,3 +142,58 @@ func DelQuestion(Uuid string) (err error) {
 
 	return
 }
+
+func UpQuestion(Uuid string, byteJson []byte) (err error) {
+
+	// collection
+	collection := "tpesqperguntas"
+
+	// mensagem json
+	var msgerror string
+
+	// struct model data
+	var Tp model.TPesqPerguntas
+
+	if Uuid != "" {
+
+		err = json.Unmarshal(byteJson, &Tp)
+		if err != nil {
+			msgerror = "[UpQuestion] Algo estranho ocorreu quando tentamos ler seu json!"
+			log.Println(msgerror)
+			return
+		}
+
+		// chave para fazer update
+		KeyUp := bson.M{"ppr_uuid": Uuid}
+
+		// campos a serem realizado o update
+		SetFields := bson.M{"$set": bson.M{"ppr_cod": Tp.Ppr_cod,
+			"ppr_ppq_cod": Tp.Ppr_ppq_cod, "ppr_per_cod": Tp.Ppr_per_cod,
+			"ppr_ordem": Tp.Ppr_ordem, "ppr_dtcadastro": Tp.Ppr_dtcadastro,
+			"ppr_dtaltera": Tp.Ppr_dtaltera,
+		}}
+
+		// para atualizacao temos o nome do collection a chave para efetuar o update e
+		// os campose que sera feita o set update
+		err = Update(collection, KeyUp, SetFields)
+
+		// testando se tudo
+		// correu bem
+		if err == nil {
+
+			//sucesso
+			return
+
+		} else {
+			msgerror = "[UpQuestion] Algo estranho ocorreu na sua atualizacao, foi usado o Uuid: " + Uuid
+			err = errors.New(msgerror)
+			log.Println(msgerror)
+			return
+		}
+	} else {
+		msgerror = "[UpQuestion] Uuid é obrigatório!"
+		err = errors.New(msgerror)
+		log.Println(msgerror)
+		return
+	}
+}

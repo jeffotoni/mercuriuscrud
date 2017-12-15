@@ -131,7 +131,7 @@ func Remove(namecollection string, Jcondition bson.M) (err error) {
 }
 
 // remove registro
-func Update(namecollection string, Jcondition bson.M, SetField bson.M) (status bool, err error) {
+func Update(namecollection string, Jcondition bson.M, SetField bson.M) (err error) {
 
 	// criando session e retorno o db do collection
 	col, err := conf.GetMongoCollection(namecollection)
@@ -154,13 +154,14 @@ func Update(namecollection string, Jcondition bson.M, SetField bson.M) (status b
 	// atualizacao
 	if info.Updated == 0 {
 
-		status = false
+		err = errors.New("Error ao remover no mongo o registro")
+		log.Println(err.Error())
+		return
 
-	} else {
-
-		status = true
 	}
 
+	//sucesso
+	err = nil
 	return
 }
 

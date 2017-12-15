@@ -177,7 +177,7 @@ curl -X DELETE localhost:8080/v1/questions/:id
 
 ```
 
-curl -X DELETE localhost:8080/v1/questions/:id
+curl -X PUT localhost:8080/v1/questions/:id
 -H "Content-Type: application/json" \
 -d @questionss-update.json
 ```
