@@ -41,6 +41,8 @@ func RepostaCreate(ctx *context.Context) {
 
 		} else {
 
+			// criando a tabela dinamicamente
+			// no banco de dados
 			_, err := db.Exec(createTable)
 
 			if err != nil {

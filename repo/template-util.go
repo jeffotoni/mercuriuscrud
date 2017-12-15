@@ -29,6 +29,7 @@ func SqlTmplString(nameTemplate string) (str string, err error) {
 	// o template
 	t := template.Must(template.New(nameTemplate).ParseFiles(TmplSqlGwd(nameTemplate, 0)))
 
+	// criando a referencia do template
 	if err = t.Execute(&tpl, tmpSql); err != nil {
 
 		log.Println("[SqlTmplString] Erro ao criar instancia para tempplate: " + err.Error())

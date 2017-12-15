@@ -10,8 +10,6 @@ package handler
 
 import (
 	"encoding/json"
-	//"strconv"
-	// "fmt"
 	"github.com/jeffotoni/mercuriuscrud/lib/context"
 	"github.com/jeffotoni/mercuriuscrud/model"
 	"github.com/jeffotoni/mercuriuscrud/repo"
@@ -88,15 +86,6 @@ func RepostaInsert(ctx *context.Context) {
 						// if exist o dado na base de dados
 						exist := repo.GetOne(table, "rsp_cod", Tr.Rsp_cod)
 
-						// caso
-						// exista error
-						// enviar para o cliente
-						//if exist == 0  {
-
-						//msgJson = `{"status":"error","msg":"GetOne Error: ` + err.Error() + `"}`
-
-						//} else {
-
 						// se existe
 						// nao faca
 						// o insert
@@ -120,7 +109,6 @@ func RepostaInsert(ctx *context.Context) {
 								msgJson = `{"status":"ok","msg":"seus dados foram inseridos com sucesso!", "id":"` + ID + `"}`
 							}
 						}
-						//}
 					}
 
 					// send write to client
