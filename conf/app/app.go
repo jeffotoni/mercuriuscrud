@@ -114,7 +114,7 @@ func SetupRoutes(app *macaron.Macaron) {
 		app.Group("/resposta", func() {
 
 			// inserindo na base de dados
-			app.Post("/create/table", handler.Hello)
+			app.Post("/create/table", handler.RepostaCreate)
 
 			// inserindo na base de dados
 			app.Post("/insert", handler.RepostaInsert)

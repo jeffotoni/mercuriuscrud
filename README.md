@@ -8,6 +8,18 @@ Um Crud Usando MongoDb e Mercurius como Framework ...
 Install [https://docs.mongodb.com/v3.4/tutorial/install-mongodb-on-ubuntu/]
 ```
 
+# Install Postgresql
+
+```
+Install [https://www.postgresql.org/download/linux/ubuntu/]
+```
+
+# Create Database Postgresql
+
+```
+createdb mercuriuscrud -U postgres -O postgres -E UTF-8
+```
+
 # Install Dependencies
 
 ```
@@ -78,6 +90,8 @@ Application entry
 // testando o server
 http://localhost:8080/v1/public/ping
 
+// PERGUNTAS MONGO
+
 // inserindo perguntas na base
 http://localhost:8080/v1/pergunta/insert
 
@@ -92,6 +106,13 @@ http://localhost:8080/v1/pergunta/find/id
 
 // Buscando todos registros
 http://localhost:8080/v1/pergunta/findall
+
+// RESPOSTAS POSTGRESQL
+
+// criando tabela dinamicamente
+http://localhost:8080/v1/resposta/create/table
+
+... restante em desenvolvimento, insert, update, delete e select
 
 ```
 
