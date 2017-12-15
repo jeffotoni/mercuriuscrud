@@ -52,7 +52,7 @@ func QuestionsCreate(ctx *context.Context) {
 		// de error
 		if err != nil {
 			log.Println("[QuestionsCreate] Erro ao capturar Json: " + err.Error())
-			msgJson := `{"status":"error","msg":"Nao foi possivel ler seu json error: " ` + err.Error() + `}`
+			msgJson = `{"status":"error","msg":"Nao foi possivel ler seu json error: " ` + err.Error() + `}`
 			ctx.JSON(http.StatusUnauthorized, msgJson)
 			return
 		} else {
@@ -68,27 +68,24 @@ func QuestionsCreate(ctx *context.Context) {
 				// tratando o erro
 				if err != nil {
 					log.Println(err.Error())
-					msgJson := `{"status":"error","msg":"` + err.Error() + `"}`
+					msgJson = `{"status":"error","msg":"` + err.Error() + `"}`
 					ctx.JSON(http.StatusUnauthorized, msgJson)
 					return
 				} else {
 					// sucesso
 					msgJson = `{"status":"ok","msg":"seus dados foram inseridos com sucesso!", "Uuid":"` + Uuid + `"}`
-					// send write to client
 					ctx.JSON(http.StatusOK, msgJson)
 				}
 			} else {
 				log.Println("[QuestionsCreate] Erro em sua string json nao pode ser vazia!")
-				msgJson := `{"status":"error","msg":"Erro em sua string json"}`
-				// send write to client
+				msgJson = `{"status":"error","msg":"Erro em sua string json"}`
 				ctx.JSON(http.StatusUnauthorized, msgJson)
 				return
 			}
 		} // fim else
 	} else {
 		log.Println("[QuestionsCreate] Erro Content-Type: aceitamos somente " + cTypeAceito)
-		msgJson := `{"status":"error","msg":"error no Content-Type: ` + cType + `, aceitamos somente [Content-Type: ` + cTypeAceito + `]"}`
-		// send write to client
+		msgJson = `{"status":"error","msg":"error no Content-Type: ` + cType + `, aceitamos somente [Content-Type: ` + cTypeAceito + `]"}`
 		ctx.JSON(http.StatusUnauthorized, msgJson)
 		return
 	}

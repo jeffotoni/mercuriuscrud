@@ -92,7 +92,6 @@ func FindExist(namecollection string, Jcondition bson.M) (exist bool, err error)
 
 	if tpesqcount > 0 {
 
-		// log.Println(err.Error())
 		exist = true
 		return
 	}

@@ -22,6 +22,9 @@ func AddQuestion(byteJson []byte) (Uuid string, err error) {
 	// collection
 	collection := "tpesqperguntas"
 
+	// conter os erros
+	var msgerror string
+
 	// struct model data
 	var Tp model.TPesqPerguntas
 
@@ -39,10 +42,14 @@ func AddQuestion(byteJson []byte) (Uuid string, err error) {
 
 		// campo obrigatorio string
 		if Tp.Ppr_dtcadastro == "" {
-			log.Println("[AddQuestion] Erro A coluna Ppr_dtcadastro obrigatoria!")
+			msgerror = "[AddQuestion] Erro A coluna Ppr_dtcadastro obrigatoria!"
+			err = errors.New(msgerror)
+			log.Println(msgerror)
 			return
 		} else if Tp.Ppr_dtaltera == "" { // campo obrigatorio string
-			log.Println("[AddQuestion] Erro A coluna Ppr_dtaltera obrigatoria!")
+			msgerror = "[AddQuestion] Erro A coluna Ppr_dtaltera obrigatoria!"
+			err = errors.New(msgerror)
+			log.Println(msgerror)
 			return
 		} else {
 
@@ -60,7 +67,7 @@ func AddQuestion(byteJson []byte) (Uuid string, err error) {
 				// nao faca
 				// o insert
 				if exist {
-					msgerror := "[AddQuestion] Error estes dados ja existe na base de dados!"
+					msgerror = "[AddQuestion] Error estes dados ja existe na base de dados!"
 					err = errors.New(msgerror)
 					log.Println(msgerror)
 					return
