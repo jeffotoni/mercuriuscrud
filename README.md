@@ -112,6 +112,7 @@ http://localhost:8080/v1/pergunta/findall
 // criando tabela dinamicamente
 http://localhost:8080/v1/resposta/create/table
 
+// inserindo registro na base do postgres
 http://localhost:8080/v1/resposta/insert
 
 ... restante em desenvolvimento, update, delete e select
