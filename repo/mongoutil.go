@@ -10,6 +10,7 @@ package repo
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/jeffotoni/mercuriuscrud/conf"
 	"github.com/jeffotoni/mercuriuscrud/model"
@@ -101,7 +102,7 @@ func FindExist(namecollection string, Jcondition bson.M) (exist bool, err error)
 }
 
 // remove registro
-func Remove(namecollection string, Jcondition bson.M) (status bool, err error) {
+func Remove(namecollection string, Jcondition bson.M) (err error) {
 
 	// criando session e retorno o db do collection
 	col, err := conf.GetMongoCollection(namecollection)
@@ -120,14 +121,12 @@ func Remove(namecollection string, Jcondition bson.M) (status bool, err error) {
 	}
 
 	if info.Removed == 0 {
-
-		status = false
-
-	} else {
-
-		status = true
+		err = errors.New("Error ao remover no mongo o registro")
+		log.Println(err.Error())
+		return
 	}
 
+	err = nil
 	return
 }
 

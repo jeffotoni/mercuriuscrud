@@ -90,3 +90,45 @@ func QuestionsCreate(ctx *context.Context) {
 		return
 	}
 }
+
+// removendo registro da base de dados
+func QuestionsDelete(ctx *context.Context) {
+
+	// mensagem json
+	var msgJson, msgerror string
+
+	// Chave unica
+	Uuid := ctx.Params(":id")
+
+	// testando
+	// o Uuid
+	if Uuid != "" {
+
+		// del question
+		err := repo.DelQuestion(Uuid)
+
+		// if tudo correr bem
+		// registro foi removido
+		// com sucesso
+		if err == nil {
+
+			// Uuid
+			msgJson = `{"status":"ok","msg":"removido com sucesso seu Uuid: ` + Uuid + `!"}`
+			ctx.JSON(http.StatusOK, msgJson)
+
+		} else {
+			msgerror = `[QuestionsDelete] Algo estranho ocorreu sua remocao nao foi realizada no id: ` + Uuid
+			log.Println(msgerror)
+			msgJson = `{"status":"error","msg":"` + msgerror + `]"}`
+			ctx.JSON(http.StatusUnauthorized, msgJson)
+			return
+		}
+
+	} else {
+		msgerror = "[QuestionsDelete] Uuid é obrigatório!"
+		log.Println(msgerror)
+		msgJson = `{"status":"error","msg":"` + msgerror + `]"}`
+		ctx.JSON(http.StatusUnauthorized, msgJson)
+		return
+	}
+}

@@ -112,3 +112,33 @@ func AddQuestion(byteJson []byte) (Uuid string, err error) {
 		}
 	}
 }
+
+// criando question
+func DelQuestion(Uuid string) (err error) {
+
+	// mensagem error
+	var msgerror string
+
+	if Uuid == "" {
+
+		msgerror = "[DelQuestion] Uuid obrigatorio!"
+		err = errors.New(msgerror)
+		log.Println(msgerror)
+		return
+	}
+
+	// collection
+	collection := "tpesqperguntas"
+
+	// chamando o metodo para remover o registro do banco
+	err = Remove(collection, bson.M{"ppr_uuid": Uuid})
+
+	if err != nil {
+		msgerror = "[DelQuestion] Algo errado ocorreu ao remover registro: " + err.Error()
+		err = errors.New(msgerror)
+		log.Println(msgerror)
+		return
+	}
+
+	return
+}
