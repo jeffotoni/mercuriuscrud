@@ -40,8 +40,31 @@ func AddQuestion(byteJson []byte) (Uuid string, err error) {
 		return
 	} else {
 
-		// campo obrigatorio string
-		if Tp.Ppr_dtcadastro == "" {
+		//
+		// campos obrigatorios
+		//
+
+		if Tp.Ppr_ordem <= 0 {
+			msgerror = "[AddQuestion] Erro A coluna ppr_ordem obrigatoria!"
+			err = errors.New(msgerror)
+			log.Println(msgerror)
+			return
+		} else if Tp.Ppr_per_cod <= 0 {
+			msgerror = "[AddQuestion] Erro A coluna Ppr_per_cod obrigatoria!"
+			err = errors.New(msgerror)
+			log.Println(msgerror)
+			return
+		} else if Tp.Ppr_cod <= 0 {
+			msgerror = "[AddQuestion] Erro A coluna Ppr_cod obrigatoria!"
+			err = errors.New(msgerror)
+			log.Println(msgerror)
+			return
+		} else if Tp.Ppr_ppq_cod <= 0 {
+			msgerror = "[AddQuestion] Erro A coluna Ppr_ppq_cod obrigatoria!"
+			err = errors.New(msgerror)
+			log.Println(msgerror)
+			return
+		} else if Tp.Ppr_dtcadastro == "" {
 			msgerror = "[AddQuestion] Erro A coluna Ppr_dtcadastro obrigatoria!"
 			err = errors.New(msgerror)
 			log.Println(msgerror)
