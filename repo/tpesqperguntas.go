@@ -11,11 +11,8 @@ package repo
 import (
 	"encoding/json"
 	"github.com/jeffotoni/mercuriuscrud/model"
-	"github.com/jeffotoni/mercuriuscrud/repo"
 	bson "gopkg.in/mgo.v2/bson"
 	"log"
-	"net/http"
-	"strings"
 )
 
 // criando question
@@ -26,10 +23,12 @@ func AddQuestion(byteJson []byte) (Uuid string, err error) {
 
 	// struct model data
 	var Tp model.TPesqPerguntas
-	// var TpC model.TPCondition
+
+	//
+	var exist bool
 
 	// convert json to struct
-	err := json.Unmarshal(byteJson, &Tp)
+	err = json.Unmarshal(byteJson, &Tp)
 
 	//checar o erro
 	if err != nil {
@@ -48,7 +47,7 @@ func AddQuestion(byteJson []byte) (Uuid string, err error) {
 
 			// validar se existe o dado no banco
 			// if exist o dado no mongo nao faca
-			exist, err := repo.FindExist(collection, bson.M{"ppr_cod": Tp.Ppr_cod})
+			exist, err = FindExist(collection, bson.M{"ppr_cod": Tp.Ppr_cod})
 
 			// validar
 			if err != nil {
@@ -67,12 +66,12 @@ func AddQuestion(byteJson []byte) (Uuid string, err error) {
 					// faca o insert no banco de dados
 					// retorne o uuid do salvar
 					// caso tenha erro informe ao cliente
-					insertId, err := repo.Insert(collection, Tp)
+					Uuid, err = Insert(collection, Tp)
 					if err != nil {
 						log.Println("[AddQuestion] ocorreu algum erro ao salvar seus dados error: !" + err.Error())
 						return
 					} else {
-						Uuid = insertId
+
 						return
 					}
 				}

@@ -11,12 +11,16 @@ package handler
 import (
 	"github.com/jeffotoni/mercuriuscrud/lib/context"
 	"github.com/jeffotoni/mercuriuscrud/repo"
+	"log"
 	"net/http"
 	"strings"
 )
 
 // inserindo perguntas na base de dados
 func QuestionsCreate(ctx *context.Context) {
+
+	// bytes json body
+	var byteJson []byte
 
 	// define
 	// var error
@@ -37,7 +41,7 @@ func QuestionsCreate(ctx *context.Context) {
 		// capturando json findo da requisicao
 		// estamos pegando em bytes para ser
 		// usado no Unmarshal que recebe bytes
-		byteJson, err := ctx.Req.Body().Bytes()
+		byteJson, err = ctx.Req.Body().Bytes()
 
 		// fechando Req.Body
 		defer ctx.Req.Body().ReadCloser()

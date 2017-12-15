@@ -94,7 +94,7 @@ func SetupRoutes(app *macaron.Macaron) {
 		app.Group("/questions", func() {
 
 			// inserindo na base de dados
-			app.Post("/", handler.PerguntaCreate)
+			app.Post("/", handler.QuestionsCreate)
 
 			// deletando da base de dados
 			app.Delete("/:id", handler.PerguntaDelete)
