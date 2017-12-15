@@ -185,7 +185,7 @@ func UpQuestion(Uuid string, byteJson []byte) (err error) {
 			return
 
 		} else {
-			msgerror = "[UpQuestion] Algo estranho ocorreu na sua atualizacao, foi usado o Uuid: " + Uuid
+			msgerror = "[UpQuestion] " + err.Error()
 			err = errors.New(msgerror)
 			log.Println(msgerror)
 			return

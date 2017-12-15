@@ -154,7 +154,7 @@ func Update(namecollection string, Jcondition bson.M, SetField bson.M) (err erro
 	// atualizacao
 	if info.Updated == 0 {
 
-		err = errors.New("Error ao remover no mongo o registro")
+		err = errors.New("Error ao atualizar no mongo o registro")
 		log.Println(err.Error())
 		return
 

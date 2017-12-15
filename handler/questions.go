@@ -158,7 +158,7 @@ func QuestionsUpdate(ctx *context.Context) {
 		byteJson, err = ctx.Req.Body().Bytes()
 
 		if err != nil {
-			msgJson = `{"status":"error","msg":"` + err.Error() + `]"}`
+			msgJson = `{"status":"error","msg":"` + err.Error() + `"}`
 			ctx.JSON(http.StatusUnauthorized, msgJson)
 			return
 		}
@@ -176,10 +176,11 @@ func QuestionsUpdate(ctx *context.Context) {
 			// Uuid
 			msgJson = `{"status":"ok","msg":"atualizado com sucesso seu Uuid: ` + Uuid + `!"}`
 			ctx.JSON(http.StatusOK, msgJson)
+
 		} else {
-			msgerror = `[QuestionsUpdate] Algo estranho ocorreu em sua atualizacao Uuid: ` + Uuid
-			log.Println(msgerror)
-			msgJson = `{"status":"error","msg":"` + msgerror + `]"}`
+
+			log.Println(err.Error())
+			msgJson = `{"status":"error","msg":"` + err.Error() + `]"}`
 			ctx.JSON(http.StatusUnauthorized, msgJson)
 			return
 		}
