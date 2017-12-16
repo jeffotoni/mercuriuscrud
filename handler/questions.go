@@ -73,7 +73,7 @@ func QuestionsCreate(ctx *context.Context) {
 					return
 				} else {
 					// sucesso
-					msgJson = `{"status":"ok","msg":"seus dados foram inseridos com sucesso!", "Uuid":"` + Uuid + `"}`
+					msgJson = `{"status":"ok","msg":"seus dados foram inseridos com sucesso!", "uuid":"` + Uuid + `"}`
 					ctx.JSON(http.StatusOK, msgJson)
 				}
 			} else {

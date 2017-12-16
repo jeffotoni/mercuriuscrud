@@ -80,13 +80,14 @@ Application entry
 
 - POST /v1/public/ping
 
+
 # Data Base using Mongo
+
+- POST /v1/questions 		- Cria uma nova questao
 
 - GET /v1/questions 		- Recupera a lista de questoes
 
 - GET /v1/questions/12 		- Recupera uma questao específica
-
-- POST /v1/questions 		- Cria uma nova questao
 
 - PUT /v1/questions/23 		- Atualiza a questao #23
 
@@ -95,11 +96,11 @@ Application entry
 
 # Data Base using Postgresql
 
+- POST /v1/answers 		- Cria uma nova answers
+
 - GET /v1/answers 		- Recupera a lista de answers
 
 - GET /v1/answers/12 		- Recupera uma answers específica
-
-- POST /v1/answers 		- Cria uma nova answers
 
 - PUT /v1/answers/23 		- Atualiza a answers #23
 
@@ -115,12 +116,16 @@ Application entry
 ```
 
 curl -X POST localhost:8080/v1/public/ping
+
 ```
 
 # Response
 
+A successful request returns pong
+
 ```
 pong
+
 ```
 
 # Example Curl - POST /v1/questions
@@ -130,6 +135,7 @@ pong
 curl -v -X POST localhost:8080/v1/questions \
 -H "Content-Type: application/json" \
 -d @questionss.json
+
 ```
 # OR
 
@@ -138,59 +144,69 @@ curl -v -X POST localhost:8080/v1/questions \
 curl -X POST localhost:8080/v1/questions \
 -H "Content-Type: application/json" \
 -d '{"ppr_cod":100,"ppr_ppq_cod":6,"ppr_per_cod":5,"ppr_ordem":3,"ppr_dtcadastro":"10/07/2017","ppr_dtaltera":"12/08/2017"}'
+
 ```
 
-# Response
+# Sample Response
 
 A successful request returns the HTTP 200 OK status code and a JSON response body
 
 ```
 
-'{"status'":"error|ok","msg":"aqui estara a mensagem de error ou sucesso", "id":"aqui ira conter o id"}' 
-```
-
-# Example Curl Width Json
-
-```
-
-curl -X DELETE localhost:8080/v1/questions/:id
-```
-
-# return
+{
+	"status'":"ok",
+	"msg":"seus dados foram inseridos com sucesso!", 
+	"uuid":"238d377b-5db7-45be-ba71-858bed7b4cfc"
+}
 
 ```
 
-'{"status":"ok","msg":"removido com sucesso!"}'
-```
-
-# Example Curl Width Json
+# Example Curl - DELETE /v1/questions/1234
 
 ```
 
-curl -X PUT localhost:8080/v1/questions/:id
+curl -X DELETE localhost:8080/v1/questions/1234
+```
+
+# Sample Response
+
+```
+
+{"status":"ok","msg":"removido com sucesso!"}
+
+```
+
+# Example Curl - PUT /v1/questions/1234
+
+```
+
+curl -X PUT localhost:8080/v1/questions/1234
 -H "Content-Type: application/json" \
 -d @questionss-update.json
-```
-
-# return
 
 ```
 
-'{"status":"ok","msg":"Atualizado com sucesso!"}'
-```
-
-# Example Curl
+# Sample Response
 
 ```
 
-curl -X GET localhost:8080/v1/questions/:id
-```
-
-# return
+{"status":"ok","msg":"Atualizado com sucesso!"}
 
 ```
 
-'{
+# Example Curl - GET /v1/questions/1235
+
+```
+
+curl -X GET localhost:8080/v1/questions/1235
+
+```
+
+# Sample Response
+
+```
+
+{
 	"status":"ok",
 	"msg":"Encontrou o id na base de dados!", 
 	"data":
@@ -202,21 +218,23 @@ curl -X GET localhost:8080/v1/questions/:id
 			"ppr_per_cod":"1001",
 			"ppr_ppq_cod":"1500"
 		}"
-}'
+}
+
 ```
 
-# Example Curl
+# Example Curl - GET /v1/questions
 
 ```
 
 curl -X GET localhost:8080/v1/questions
-```
-
-# return
 
 ```
 
-'{
+# Sample Response
+
+```
+
+{
 	"status":"ok",
 	"msg":"Encontrou o id na base de dados!", 
 	"data":"
@@ -266,21 +284,24 @@ curl -X GET localhost:8080/v1/questions
 		"ppr_dtaltera":"12/03/2017",
 		"ppr_datetime":"2017-12-14 16:38:18"
 	}]"
-}'
+}
+
 ```
 
-# Example Curl
+# Example Curl  - POST /v1/answers/tables
 
 ```
 
 curl -X POST localhost:8080/v1/answers/tables
+
 ```
 
-# Example Curl
+# Example Curl - POST /v1/answers
 
 ```
 
 curl -X POST localhost:8080/v1/answers \
 -H 'Content-Type: application/json'
 -d @answers.json
+
 ```
