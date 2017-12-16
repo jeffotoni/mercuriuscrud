@@ -251,6 +251,12 @@ func FindAll(namecollection string) (jsonStr string, err error) {
 			log.Println(err.Error())
 			return
 		}
+	} else {
+
+		msgerror = "Nao encontramos o resultado"
+		err = errors.New(msgerror)
+		log.Println(msgerror)
+		return
 	}
 
 	// recebendo o json

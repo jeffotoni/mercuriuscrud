@@ -16,6 +16,8 @@ import (
 	"strings"
 )
 
+var msgerror string
+
 // inserindo perguntas na base de dados
 func QuestionsCreate(ctx *context.Context) {
 
@@ -95,7 +97,7 @@ func QuestionsCreate(ctx *context.Context) {
 func QuestionsDelete(ctx *context.Context) {
 
 	// mensagem json
-	var msgJson, msgerror string
+	var msgJson string
 
 	// Chave unica
 	Uuid := ctx.Params(":id")
@@ -140,7 +142,7 @@ func QuestionsUpdate(ctx *context.Context) {
 	var err error
 
 	// mensagem json
-	var msgJson, msgerror string
+	var msgJson string
 
 	// byjson
 	var byteJson []byte
@@ -187,6 +189,48 @@ func QuestionsUpdate(ctx *context.Context) {
 
 	} else {
 		msgerror = "[QuestionsUpdate] Uuid é obrigatório!"
+		log.Println(msgerror)
+		msgJson = `{"status":"error","msg":"` + msgerror + `]"}`
+		ctx.JSON(http.StatusUnauthorized, msgJson)
+		return
+	}
+}
+
+// Busca Questions especifico na base de dados
+func QuestionsFind(ctx *context.Context) {
+
+	// mensagem json
+	var msgJson string
+
+	// chave para atualizacao
+	Uuid := ctx.Params(":id")
+
+	if Uuid != "" {
+
+		// para atualizacao temos o nome do collection a chave para efetuar o update e
+		// os campose que sera feita o set update
+		strJson, err := repo.GetQuestion(Uuid)
+
+		// testando se tudo
+		// correu bem
+		if err == nil {
+
+			// Uuid
+			msgJson = `{"status":"ok","msg":"Encontrou o id na base de dados!", "data":"` + strJson + `"}`
+			// send write to client
+			ctx.JSON(http.StatusOK, msgJson)
+
+		} else {
+			msgerror = "[QuestionsFind] " + err.Error()
+			log.Println(msgerror)
+			msgJson = `{"status":"error","msg":"` + msgerror + `]"}`
+			ctx.JSON(http.StatusUnauthorized, msgJson)
+			return
+		}
+
+	} else {
+
+		msgerror = "[QuestionsFind] Uuid é obrigatorio!"
 		log.Println(msgerror)
 		msgJson = `{"status":"error","msg":"` + msgerror + `]"}`
 		ctx.JSON(http.StatusUnauthorized, msgJson)

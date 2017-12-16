@@ -19,12 +19,6 @@ import (
 // criando question
 func AddQuestion(byteJson []byte) (Uuid string, err error) {
 
-	// collection
-	collection := "tpesqperguntas"
-
-	// conter os erros
-	var msgerror string
-
 	// struct model data
 	var Tp model.TPesqPerguntas
 
@@ -78,7 +72,7 @@ func AddQuestion(byteJson []byte) (Uuid string, err error) {
 
 			// validar se existe o dado no banco
 			// if exist o dado no mongo nao faca
-			exist, err = FindExist(collection, bson.M{"ppr_cod": Tp.Ppr_cod})
+			exist, err = FindExist(tpep_collection, bson.M{"ppr_cod": Tp.Ppr_cod})
 
 			// validar
 			if err != nil {
@@ -99,7 +93,7 @@ func AddQuestion(byteJson []byte) (Uuid string, err error) {
 					// faca o insert no banco de dados
 					// retorne o uuid do salvar
 					// caso tenha erro informe ao cliente
-					Uuid, err = Insert(collection, Tp)
+					Uuid, err = Insert(tpep_collection, Tp)
 					if err != nil {
 						log.Println("[AddQuestion] ocorreu algum erro ao salvar seus dados error: !" + err.Error())
 						return
@@ -113,11 +107,8 @@ func AddQuestion(byteJson []byte) (Uuid string, err error) {
 	}
 }
 
-// criando question
+// deletando question
 func DelQuestion(Uuid string) (err error) {
-
-	// mensagem error
-	var msgerror string
 
 	if Uuid == "" {
 
@@ -127,11 +118,8 @@ func DelQuestion(Uuid string) (err error) {
 		return
 	}
 
-	// collection
-	collection := "tpesqperguntas"
-
 	// chamando o metodo para remover o registro do banco
-	err = Remove(collection, bson.M{"ppr_uuid": Uuid})
+	err = Remove(tpep_collection, bson.M{"ppr_uuid": Uuid})
 
 	if err != nil {
 		msgerror = "[DelQuestion] Algo errado ocorreu ao remover registro: " + err.Error()
@@ -143,13 +131,8 @@ func DelQuestion(Uuid string) (err error) {
 	return
 }
 
+// atualizando question
 func UpQuestion(Uuid string, byteJson []byte) (err error) {
-
-	// collection
-	collection := "tpesqperguntas"
-
-	// mensagem json
-	var msgerror string
 
 	// struct model data
 	var Tp model.TPesqPerguntas
@@ -175,7 +158,7 @@ func UpQuestion(Uuid string, byteJson []byte) (err error) {
 
 		// para atualizacao temos o nome do collection a chave para efetuar o update e
 		// os campose que sera feita o set update
-		err = Update(collection, KeyUp, SetFields)
+		err = Update(tpep_collection, KeyUp, SetFields)
 
 		// testando se tudo
 		// correu bem
@@ -196,4 +179,21 @@ func UpQuestion(Uuid string, byteJson []byte) (err error) {
 		log.Println(msgerror)
 		return
 	}
+}
+
+// Buscando question especifico
+func GetQuestion(Uuid string) (strJson string, err error) {
+
+	// para atualizacao temos o nome do collection a chave para efetuar o update e
+	// os campose que sera feita o set update
+	strJson, err = Find(tpep_collection, Uuid)
+
+	if err != nil {
+
+		msgerror = "[UpQuestion] Erro ao efetuar a busca: " + err.Error()
+		log.Println(msgerror)
+		return
+	}
+
+	return
 }
