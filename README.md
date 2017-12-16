@@ -169,7 +169,7 @@ curl -X DELETE localhost:8080/v1/questions/1234
 
 # Sample Response
 
-```
+```json
 
 {"status":"ok","msg":"removido com sucesso!"}
 
@@ -187,7 +187,7 @@ curl -X PUT localhost:8080/v1/questions/1234
 
 # Sample Response
 
-```
+```json
 
 {"status":"ok","msg":"Atualizado com sucesso!"}
 
@@ -203,7 +203,7 @@ curl -X GET localhost:8080/v1/questions/1235
 
 # Sample Response
 
-```
+```json
 
 {
 	"status":"ok",
@@ -231,7 +231,7 @@ curl -X GET localhost:8080/v1/questions
 
 # Sample Response
 
-```
+```json
 
 {
 	"status":"ok",
