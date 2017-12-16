@@ -110,7 +110,7 @@ Application entry
 
 ```
 
-# Example Curl - POST /v1/public/ping
+### Example Curl - POST /v1/public/ping
 
 ```
 
@@ -118,7 +118,7 @@ curl -X POST localhost:8080/v1/public/ping
 
 ```
 
-# Response
+### Response
 
 A successful request returns pong
 
@@ -127,7 +127,7 @@ pong
 
 ```
 
-# Example Curl - POST /v1/questions
+### Example Curl - POST /v1/questions
 
 ```
 
@@ -136,7 +136,7 @@ curl -v -X POST localhost:8080/v1/questions \
 -d @questionss.json
 
 ```
-# OR
+### OR
 
 ```
 
@@ -146,7 +146,7 @@ curl -X POST localhost:8080/v1/questions \
 
 ```
 
-# Sample Response
+### Sample Response
 
 A successful request returns the HTTP 200 OK status code and a JSON response body
 
@@ -160,14 +160,14 @@ A successful request returns the HTTP 200 OK status code and a JSON response bod
 
 ```
 
-# Example Curl - DELETE /v1/questions/1234
+### Example Curl - DELETE /v1/questions/1234
 
 ```
 
 curl -X DELETE localhost:8080/v1/questions/1234
 ```
 
-# Sample Response
+### Sample Response
 
 ```
 
@@ -175,7 +175,7 @@ curl -X DELETE localhost:8080/v1/questions/1234
 
 ```
 
-# Example Curl - PUT /v1/questions/1234
+### Example Curl - PUT /v1/questions/1234
 
 ```
 
@@ -185,7 +185,7 @@ curl -X PUT localhost:8080/v1/questions/1234
 
 ```
 
-# Sample Response
+### Sample Response
 
 ```
 
@@ -193,7 +193,7 @@ curl -X PUT localhost:8080/v1/questions/1234
 
 ```
 
-# Example Curl - GET /v1/questions/1235
+### Example Curl - GET /v1/questions/1235
 
 ```
 
@@ -201,7 +201,7 @@ curl -X GET localhost:8080/v1/questions/1235
 
 ```
 
-# Sample Response
+### Sample Response
 
 ```
 
@@ -221,7 +221,7 @@ curl -X GET localhost:8080/v1/questions/1235
 
 ```
 
-# Example Curl - GET /v1/questions
+### Example Curl - GET /v1/questions
 
 ```
 
@@ -229,7 +229,7 @@ curl -X GET localhost:8080/v1/questions
 
 ```
 
-# Sample Response
+### Sample Response
 
 ```
 
@@ -287,7 +287,7 @@ curl -X GET localhost:8080/v1/questions
 
 ```
 
-# Example Curl  - POST /v1/answers/tables
+### Example Curl  - POST /v1/answers/tables
 
 ```
 
@@ -295,7 +295,7 @@ curl -X POST localhost:8080/v1/answers/tables
 
 ```
 
-# Example Curl - POST /v1/answers
+### Example Curl - POST /v1/answers
 
 ```
 
