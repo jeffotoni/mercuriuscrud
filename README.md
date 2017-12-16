@@ -1,7 +1,6 @@
 # mercuriuscrud
 
-Um Crud Usando MongoDb e Posgresql com Framework Mercurius. O projeto é um exemplo de como desenvolver um CRUD utilizando o framework Mercurius.
-Foi construído uma API REST para ser consumida.
+An example of crud using MongoDb and Posgresql and as Framework the Mercurius. The project is an example of how to develop a CRUD using the Mercurius framework. A REST API was built to be consumed.
 
 # Install Mongo and Postgresql
 
