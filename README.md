@@ -107,11 +107,11 @@ http://localhost:8080/v1/public/ping
 
 // Base de dados usada Mongo
 
-- GET /v1/answers 			- Recupera a lista de answers
+- GET /v1/answers 		- Recupera a lista de answers
 
 - GET /v1/answers/12 		- Recupera uma answers específica
 
-- POST /v1/answers 			- Cria uma nova answers
+- POST /v1/answers 		- Cria uma nova answers
 
 - PUT /v1/answers/23 		- Atualiza a answers #23
 
