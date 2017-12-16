@@ -7,14 +7,23 @@ An example of crud using MongoDb and Posgresql and as Framework the Mercurius. T
 ```
 Install [https://docs.mongodb.com/v3.4/tutorial/install-mongodb-on-ubuntu/]
 
+Create Database Mongo and configure
+
+$ mongo 
+
+$ use mercuriuscrud
+
+$ db
+
+$ db.createCollection("tpesqperguntas")
+
+$ show collections
+
 Install [https://www.postgresql.org/download/linux/ubuntu/]
 
-```
+Create Database Postgresql
 
-### Create Database Postgresql
-
-```
-createdb mercuriuscrud -U postgres -O postgres -E UTF-8 -T template0
+$ createdb mercuriuscrud -U postgres -O postgres -E UTF-8 -T template0
 
 ```
 
@@ -152,7 +161,7 @@ curl -X POST localhost:8080/v1/questions \
 
 ### Sample Response
 
-A successful request returns the HTTP 200 OK status code and a JSON response body
+A successful request returns the HTTP 200 OK status code and a JSON response body.
 
 ```
 
@@ -173,6 +182,8 @@ curl -X DELETE localhost:8080/v1/questions/1234
 
 ### Sample Response
 
+A successful request returns the HTTP 200 OK status code and a JSON response body.
+
 ```
 
 {"status":"ok","msg":"removido com sucesso!"}
@@ -191,6 +202,8 @@ curl -X PUT localhost:8080/v1/questions/1234
 
 ### Sample Response
 
+A successful request returns the HTTP 200 OK status code and a JSON response body.
+
 ```
 
 {"status":"ok","msg":"Atualizado com sucesso!"}
@@ -206,6 +219,8 @@ curl -X GET localhost:8080/v1/questions/1235
 ```
 
 ### Sample Response
+
+A successful request returns the HTTP 200 OK status code and a JSON response body.
 
 ```
 
@@ -234,6 +249,8 @@ curl -X GET localhost:8080/v1/questions
 ```
 
 ### Sample Response
+
+A successful request returns the HTTP 200 OK status code and a JSON response body.
 
 ```
 
