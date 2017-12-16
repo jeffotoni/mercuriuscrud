@@ -1,23 +1,20 @@
 # mercuriuscrud
 
-Um Crud Usando MongoDb e Posgresql com Framework Mercurius ...
+Um Crud Usando MongoDb e Posgresql com Framework Mercurius. O projeto é um exemplo de como desenvolver um CRUD utilizando o framework Mercurius.
+Foi construído uma API REST para ser consumida.
 
-# Install Mongo
+# Install Mongo and Postgresql
 
 ```
 Install [https://docs.mongodb.com/v3.4/tutorial/install-mongodb-on-ubuntu/]
-```
 
-# Install Postgresql
-
-```
 Install [https://www.postgresql.org/download/linux/ubuntu/]
 ```
 
 # Create Database Postgresql
 
 ```
-createdb mercuriuscrud -U postgres -O postgres -E UTF-8
+createdb mercuriuscrud -U postgres -O postgres -E UTF-8 -T template0
 ```
 
 # Install Dependencies
@@ -30,21 +27,13 @@ go get -v github.com/satori/go.uuid
 go get -v github.com/jeffotoni/mercuriuscrud
 ```
 
-# Start app
+# Start App with Run or Compile
 
 ```
 go run main.go 
-```
 
-# To Compile app
-
-```
 go build main.go
-```
 
-# Start the compiled app
-
-```
 ./main
 ```
 
@@ -87,10 +76,11 @@ Application entry
 
 ```
 
-// testando o server
-http://localhost:8080/v1/public/ping
+# test the server
 
-// Base de dados usada Mongo
+- POST /v1/public/ping
+
+# Data Base using Mongo
 
 - GET /v1/questions 		- Recupera a lista de questoes
 
@@ -103,9 +93,7 @@ http://localhost:8080/v1/public/ping
 - DELETE /v1/questions/33 	- Deleta a questao #33
 
 
-// Base de dados usando Postgresql
-
-// Base de dados usada Mongo
+# Data Base using Postgresql
 
 - GET /v1/answers 		- Recupera a lista de answers
 
