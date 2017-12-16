@@ -2,21 +2,23 @@
 
 An example of crud using MongoDb and Posgresql and as Framework the Mercurius. The project is an example of how to develop a CRUD using the Mercurius framework. A REST API was built to be consumed.
 
-# Install Mongo and Postgresql
+### Install Mongo and Postgresql
 
 ```
 Install [https://docs.mongodb.com/v3.4/tutorial/install-mongodb-on-ubuntu/]
 
 Install [https://www.postgresql.org/download/linux/ubuntu/]
+
 ```
 
-# Create Database Postgresql
+### Create Database Postgresql
 
 ```
 createdb mercuriuscrud -U postgres -O postgres -E UTF-8 -T template0
+
 ```
 
-# Install Dependencies
+### Install Dependencies
 
 ```
 go get -v gopkg.in/mgo.v2/bson
@@ -24,9 +26,10 @@ go get -v gopkg.in/mgo.v2/bson
 go get -v github.com/satori/go.uuid
 
 go get -v github.com/jeffotoni/mercuriuscrud
+
 ```
 
-# Start App with Run or Compile
+### Start App with Run or Compile
 
 ```
 go run main.go 
@@ -34,9 +37,10 @@ go run main.go
 go build main.go
 
 ./main
+
 ```
 
-# Structure of a Project
+### Structure of a Project
 
 ```
 /conf 
@@ -71,7 +75,7 @@ Application entry
 ```
 
 
-# Routes 
+### Routes 
 
 ```
 
