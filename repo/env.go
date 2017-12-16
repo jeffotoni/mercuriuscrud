@@ -10,5 +10,8 @@ package repo
 
 var (
 	tpep_collection = "tpesqperguntas"
+	trespostas      = "trespostas.sql"
+	Ttrespostas     = "trespostas"
 	msgerror        string
+	msgJson         string
 )

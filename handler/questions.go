@@ -53,8 +53,9 @@ func QuestionsCreate(ctx *context.Context) {
 		// envia mensagem
 		// de error
 		if err != nil {
-			log.Println("[QuestionsCreate] Erro ao capturar Json: " + err.Error())
-			msgJson = `{"status":"error","msg":"Nao foi possivel ler seu json error: " ` + err.Error() + `}`
+			msgerror = "[QuestionsCreate] Erro ao capturar Json: " + err.Error()
+			log.Println(msgerror)
+			msgJson = `{"status":"error","msg":"` + msgerror + `}`
 			ctx.JSON(http.StatusUnauthorized, msgJson)
 			return
 		} else {
