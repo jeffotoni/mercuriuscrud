@@ -150,7 +150,7 @@ curl -X POST localhost:8080/v1/questions \
 
 A successful request returns the HTTP 200 OK status code and a JSON response body
 
-```
+```json
 
 {
 	"status'":"ok",
