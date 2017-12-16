@@ -110,24 +110,24 @@ Application entry
 
 ```
 
-# Example Curl Ping
+# Example Curl - POST /v1/public/ping
 
 ```
 
 curl -X POST localhost:8080/v1/public/ping
 ```
 
-# return
+# Response
 
 ```
 pong
 ```
 
-# Example Curl Width Json
+# Example Curl - POST /v1/questions
 
 ```
 
-curl -X POST localhost:8080/v1/questions \
+curl -v -X POST localhost:8080/v1/questions \
 -H "Content-Type: application/json" \
 -d @questionss.json
 ```
@@ -140,7 +140,9 @@ curl -X POST localhost:8080/v1/questions \
 -d '{"ppr_cod":100,"ppr_ppq_cod":6,"ppr_per_cod":5,"ppr_ordem":3,"ppr_dtcadastro":"10/07/2017","ppr_dtaltera":"12/08/2017"}'
 ```
 
-# return
+# Response
+
+A successful request returns the HTTP 200 OK status code and a JSON response body
 
 ```
 
