@@ -197,3 +197,20 @@ func GetQuestion(Uuid string) (strJson string, err error) {
 
 	return
 }
+
+// Buscando question especifico
+func GetAllQuestion() (strJson string, err error) {
+
+	// para atualizacao temos o nome do collection a chave para efetuar o update e
+	// os campose que sera feita o set update
+	strJson, err = FindAll(tpep_collection)
+
+	if err != nil {
+
+		msgerror = "[UpQuestion] Erro ao efetuar a busca: " + err.Error()
+		log.Println(msgerror)
+		return
+	}
+
+	return
+}

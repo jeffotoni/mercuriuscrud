@@ -106,7 +106,7 @@ func SetupRoutes(app *macaron.Macaron) {
 			app.Get("/:id", handler.QuestionsFind)
 
 			// buscando na base de dados todos registros
-			app.Get("/", handler.PerguntaFindAll)
+			app.Get("/", handler.QuestionsFindAll)
 		})
 
 		// grupo resposta usando

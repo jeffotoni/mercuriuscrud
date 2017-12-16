@@ -237,3 +237,31 @@ func QuestionsFind(ctx *context.Context) {
 		return
 	}
 }
+
+// Busca Questions especifico na base de dados
+func QuestionsFindAll(ctx *context.Context) {
+
+	// mensagem json
+	var msgJson string
+
+	// para atualizacao temos o nome do collection a chave para efetuar o update e
+	// os campose que sera feita o set update
+	strJson, err := repo.GetAllQuestion()
+
+	// testando se tudo
+	// correu bem
+	if err == nil {
+
+		// Uuid
+		msgJson = `{"status":"ok","msg":"encontrado com sucesso", "data":"` + strJson + `"}`
+		// send write to client
+		ctx.JSON(http.StatusOK, msgJson)
+
+	} else {
+		msgerror = "[QuestionsFind] " + err.Error()
+		log.Println(msgerror)
+		msgJson = `{"status":"error","msg":"` + msgerror + `]"}`
+		ctx.JSON(http.StatusUnauthorized, msgJson)
+		return
+	}
+}
