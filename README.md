@@ -95,13 +95,13 @@ Application entry
 
 # Data Base using Mongo
 
-- POST /v1/questions 		- Cria uma nova questao
+- POST /v1/questions 	- Cria uma nova questao
 
 - GET /v1/questions 		- Recupera a lista de questoes
 
-- GET /v1/questions/12 		- Recupera uma questao específica
+- GET /v1/questions/12 	- Recupera uma questao específica
 
-- PUT /v1/questions/23 		- Atualiza a questao #23
+- PUT /v1/questions/23 	- Atualiza a questao #23
 
 - DELETE /v1/questions/33 	- Deleta a questao #33
 
@@ -112,9 +112,9 @@ Application entry
 
 - GET /v1/answers 		- Recupera a lista de answers
 
-- GET /v1/answers/12 		- Recupera uma answers específica
+- GET /v1/answers/12 	- Recupera uma answers específica
 
-- PUT /v1/answers/23 		- Atualiza a answers #23
+- PUT /v1/answers/23 	- Atualiza a answers #23
 
 - DELETE /v1/answers/33 	- Deleta a answers #33
 
